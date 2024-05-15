@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiap-orders-app
+  template:
+    metadata:
+      labels:
+        app: fiap-orders-app
+    spec:
+      containers:
+      - name: fiap-orders-app
+        image: DOCKER_IMAGE
+        ports:
+        - containerPort: 3003
+        envFrom:
+        - secretRef:
+            name: app-secret
